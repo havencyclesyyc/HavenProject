@@ -31,14 +31,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "repairorder")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Repairorder.findAll", query = "SELECT r FROM Repairorder r"),
-    @NamedQuery(name = "Repairorder.findByRepairOrderId", query = "SELECT r FROM Repairorder r WHERE r.repairOrderId = :repairOrderId"),
-    @NamedQuery(name = "Repairorder.findByEndDate", query = "SELECT r FROM Repairorder r WHERE r.endDate = :endDate"),
-    @NamedQuery(name = "Repairorder.findByStartDate", query = "SELECT r FROM Repairorder r WHERE r.startDate = :startDate"),
-    @NamedQuery(name = "Repairorder.findByCost", query = "SELECT r FROM Repairorder r WHERE r.cost = :cost"),
-    @NamedQuery(name = "Repairorder.findByNotes", query = "SELECT r FROM Repairorder r WHERE r.notes = :notes"),
-    @NamedQuery(name = "Repairorder.findByStatus", query = "SELECT r FROM Repairorder r WHERE r.status = :status")})
-public class Repairorder implements Serializable {
+    @NamedQuery(name = "RepairOrder.findAll", query = "SELECT r FROM RepairOrder r"),
+    @NamedQuery(name = "RepairOrder.findByRepairOrderId", query = "SELECT r FROM RepairOrder r WHERE r.repairOrderId = :repairOrderId"),
+    @NamedQuery(name = "RepairOrder.findByEndDate", query = "SELECT r FROM RepairOrder r WHERE r.endDate = :endDate"),
+    @NamedQuery(name = "RepairOrder.findByStartDate", query = "SELECT r FROM RepairOrder r WHERE r.startDate = :startDate"),
+    @NamedQuery(name = "RepairOrder.findByCost", query = "SELECT r FROM RepairOrder r WHERE r.cost = :cost"),
+    @NamedQuery(name = "RepairOrder.findByNotes", query = "SELECT r FROM RepairOrder r WHERE r.notes = :notes"),
+    @NamedQuery(name = "RepairOrder.findByStatus", query = "SELECT r FROM RepairOrder r WHERE r.status = :status")})
+public class RepairOrder implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -62,15 +62,15 @@ public class Repairorder implements Serializable {
     private Character status;
     @JoinColumn(name = "repairBikeId", referencedColumnName = "repairBikeId")
     @ManyToOne
-    private Repairbike repairBikeId;
+    private RepairBike repairBikeId;
     @JoinColumn(name = "userid", referencedColumnName = "userid")
     @ManyToOne
     private User userid;
 
-    public Repairorder() {
+    public RepairOrder() {
     }
 
-    public Repairorder(Integer repairOrderId) {
+    public RepairOrder(Integer repairOrderId) {
         this.repairOrderId = repairOrderId;
     }
 
@@ -122,11 +122,11 @@ public class Repairorder implements Serializable {
         this.status = status;
     }
 
-    public Repairbike getRepairBikeId() {
+    public RepairBike getRepairBikeId() {
         return repairBikeId;
     }
 
-    public void setRepairBikeId(Repairbike repairBikeId) {
+    public void setRepairBikeId(RepairBike repairBikeId) {
         this.repairBikeId = repairBikeId;
     }
 
@@ -148,10 +148,10 @@ public class Repairorder implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Repairorder)) {
+        if (!(object instanceof RepairOrder)) {
             return false;
         }
-        Repairorder other = (Repairorder) object;
+        RepairOrder other = (RepairOrder) object;
         if ((this.repairOrderId == null && other.repairOrderId != null) || (this.repairOrderId != null && !this.repairOrderId.equals(other.repairOrderId))) {
             return false;
         }
@@ -160,7 +160,7 @@ public class Repairorder implements Serializable {
 
     @Override
     public String toString() {
-        return "domainmodel.Repairorder[ repairOrderId=" + repairOrderId + " ]";
+        return "domainmodel.RepairOrder[ repairOrderId=" + repairOrderId + " ]";
     }
     
 }

@@ -29,14 +29,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "purchaseorder")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Purchaseorder.findAll", query = "SELECT p FROM Purchaseorder p"),
-    @NamedQuery(name = "Purchaseorder.findByPurchaseOrderId", query = "SELECT p FROM Purchaseorder p WHERE p.purchaseOrderId = :purchaseOrderId"),
-    @NamedQuery(name = "Purchaseorder.findByShippingAddress", query = "SELECT p FROM Purchaseorder p WHERE p.shippingAddress = :shippingAddress"),
-    @NamedQuery(name = "Purchaseorder.findByBillingAddress", query = "SELECT p FROM Purchaseorder p WHERE p.billingAddress = :billingAddress"),
-    @NamedQuery(name = "Purchaseorder.findByDatePlaced", query = "SELECT p FROM Purchaseorder p WHERE p.datePlaced = :datePlaced"),
-    @NamedQuery(name = "Purchaseorder.findByEstimatedDelivery", query = "SELECT p FROM Purchaseorder p WHERE p.estimatedDelivery = :estimatedDelivery"),
-    @NamedQuery(name = "Purchaseorder.findByStatus", query = "SELECT p FROM Purchaseorder p WHERE p.status = :status")})
-public class Purchaseorder implements Serializable {
+    @NamedQuery(name = "PurchaseOrder.findAll", query = "SELECT p FROM PurchaseOrder p"),
+    @NamedQuery(name = "PurchaseOrder.findByPurchaseOrderId", query = "SELECT p FROM PurchaseOrder p WHERE p.purchaseOrderId = :purchaseOrderId"),
+    @NamedQuery(name = "PurchaseOrder.findByShippingAddress", query = "SELECT p FROM PurchaseOrder p WHERE p.shippingAddress = :shippingAddress"),
+    @NamedQuery(name = "PurchaseOrder.findByBillingAddress", query = "SELECT p FROM PurchaseOrder p WHERE p.billingAddress = :billingAddress"),
+    @NamedQuery(name = "PurchaseOrder.findByDatePlaced", query = "SELECT p FROM PurchaseOrder p WHERE p.datePlaced = :datePlaced"),
+    @NamedQuery(name = "PurchaseOrder.findByEstimatedDelivery", query = "SELECT p FROM PurchaseOrder p WHERE p.estimatedDelivery = :estimatedDelivery"),
+    @NamedQuery(name = "PurchaseOrder.findByStatus", query = "SELECT p FROM PurchaseOrder p WHERE p.status = :status")})
+public class PurchaseOrder implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -63,10 +63,10 @@ public class Purchaseorder implements Serializable {
     @ManyToOne
     private User userid;
 
-    public Purchaseorder() {
+    public PurchaseOrder() {
     }
 
-    public Purchaseorder(Integer purchaseOrderId) {
+    public PurchaseOrder(Integer purchaseOrderId) {
         this.purchaseOrderId = purchaseOrderId;
     }
 
@@ -144,10 +144,10 @@ public class Purchaseorder implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Purchaseorder)) {
+        if (!(object instanceof PurchaseOrder)) {
             return false;
         }
-        Purchaseorder other = (Purchaseorder) object;
+        PurchaseOrder other = (PurchaseOrder) object;
         if ((this.purchaseOrderId == null && other.purchaseOrderId != null) || (this.purchaseOrderId != null && !this.purchaseOrderId.equals(other.purchaseOrderId))) {
             return false;
         }
@@ -156,7 +156,7 @@ public class Purchaseorder implements Serializable {
 
     @Override
     public String toString() {
-        return "domainmodel.Purchaseorder[ purchaseOrderId=" + purchaseOrderId + " ]";
+        return "domainmodel.PurchaseOrder[ purchaseOrderId=" + purchaseOrderId + " ]";
     }
     
 }

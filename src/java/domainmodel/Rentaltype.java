@@ -28,10 +28,10 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "rentaltype")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Rentaltype.findAll", query = "SELECT r FROM Rentaltype r"),
-    @NamedQuery(name = "Rentaltype.findByRentalTypeId", query = "SELECT r FROM Rentaltype r WHERE r.rentalTypeId = :rentalTypeId"),
-    @NamedQuery(name = "Rentaltype.findByRatePerDay", query = "SELECT r FROM Rentaltype r WHERE r.ratePerDay = :ratePerDay")})
-public class Rentaltype implements Serializable {
+    @NamedQuery(name = "RentalType.findAll", query = "SELECT r FROM RentalType r"),
+    @NamedQuery(name = "RentalType.findByRentalTypeId", query = "SELECT r FROM RentalType r WHERE r.rentalTypeId = :rentalTypeId"),
+    @NamedQuery(name = "RentalType.findByRatePerDay", query = "SELECT r FROM RentalType r WHERE r.ratePerDay = :ratePerDay")})
+public class RentalType implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -43,12 +43,12 @@ public class Rentaltype implements Serializable {
     @Column(name = "ratePerDay")
     private BigDecimal ratePerDay;
     @OneToMany(mappedBy = "typeId")
-    private List<Rentalorder> rentalorderList;
+    private List<RentalOrder> rentalOrderList;
 
-    public Rentaltype() {
+    public RentalType() {
     }
 
-    public Rentaltype(Integer rentalTypeId) {
+    public RentalType(Integer rentalTypeId) {
         this.rentalTypeId = rentalTypeId;
     }
 
@@ -69,12 +69,12 @@ public class Rentaltype implements Serializable {
     }
 
     @XmlTransient
-    public List<Rentalorder> getRentalorderList() {
-        return rentalorderList;
+    public List<RentalOrder> getRentalOrderList() {
+        return rentalOrderList;
     }
 
-    public void setRentalorderList(List<Rentalorder> rentalorderList) {
-        this.rentalorderList = rentalorderList;
+    public void setRentalOrderList(List<RentalOrder> rentalOrderList) {
+        this.rentalOrderList = rentalOrderList;
     }
 
     @Override
@@ -87,10 +87,10 @@ public class Rentaltype implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Rentaltype)) {
+        if (!(object instanceof RentalType)) {
             return false;
         }
-        Rentaltype other = (Rentaltype) object;
+        RentalType other = (RentalType) object;
         if ((this.rentalTypeId == null && other.rentalTypeId != null) || (this.rentalTypeId != null && !this.rentalTypeId.equals(other.rentalTypeId))) {
             return false;
         }
@@ -99,7 +99,7 @@ public class Rentaltype implements Serializable {
 
     @Override
     public String toString() {
-        return "domainmodel.Rentaltype[ rentalTypeId=" + rentalTypeId + " ]";
+        return "domainmodel.RentalType[ rentalTypeId=" + rentalTypeId + " ]";
     }
     
 }

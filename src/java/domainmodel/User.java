@@ -18,7 +18,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -47,7 +46,7 @@ public class User implements Serializable {
     @NotNull
     @Column(name = "userid")
     private Integer userid;
-    @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
+    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 30)
@@ -73,9 +72,9 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "userid")
     private List<Address> addressList;
     @OneToMany(mappedBy = "userid")
-    private List<Purchaseorder> purchaseorderList;
+    private List<PurchaseOrder> purchaseOrderList;
     @OneToMany(mappedBy = "userid")
-    private List<Repairorder> repairorderList;
+    private List<RepairOrder> repairOrderList;
     @JoinColumn(name = "roleid", referencedColumnName = "roleid")
     @ManyToOne
     private Role roleid;
@@ -159,21 +158,21 @@ public class User implements Serializable {
     }
 
     @XmlTransient
-    public List<Purchaseorder> getPurchaseorderList() {
-        return purchaseorderList;
+    public List<PurchaseOrder> getPurchaseOrderList() {
+        return purchaseOrderList;
     }
 
-    public void setPurchaseorderList(List<Purchaseorder> purchaseorderList) {
-        this.purchaseorderList = purchaseorderList;
+    public void setPurchaseOrderList(List<PurchaseOrder> purchaseOrderList) {
+        this.purchaseOrderList = purchaseOrderList;
     }
 
     @XmlTransient
-    public List<Repairorder> getRepairorderList() {
-        return repairorderList;
+    public List<RepairOrder> getRepairOrderList() {
+        return repairOrderList;
     }
 
-    public void setRepairorderList(List<Repairorder> repairorderList) {
-        this.repairorderList = repairorderList;
+    public void setRepairOrderList(List<RepairOrder> repairOrderList) {
+        this.repairOrderList = repairOrderList;
     }
 
     public Role getRoleid() {

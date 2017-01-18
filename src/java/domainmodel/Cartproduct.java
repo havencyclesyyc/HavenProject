@@ -27,12 +27,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "cartproduct")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Cartproduct.findAll", query = "SELECT c FROM Cartproduct c"),
-    @NamedQuery(name = "Cartproduct.findByCartProductId", query = "SELECT c FROM Cartproduct c WHERE c.cartProductId = :cartProductId"),
-    @NamedQuery(name = "Cartproduct.findByProductId", query = "SELECT c FROM Cartproduct c WHERE c.productId = :productId"),
-    @NamedQuery(name = "Cartproduct.findByQuantity", query = "SELECT c FROM Cartproduct c WHERE c.quantity = :quantity"),
-    @NamedQuery(name = "Cartproduct.findByPrice", query = "SELECT c FROM Cartproduct c WHERE c.price = :price")})
-public class Cartproduct implements Serializable {
+    @NamedQuery(name = "CartProduct.findAll", query = "SELECT c FROM CartProduct c"),
+    @NamedQuery(name = "CartProduct.findByCartProductId", query = "SELECT c FROM CartProduct c WHERE c.cartProductId = :cartProductId"),
+    @NamedQuery(name = "CartProduct.findByProductId", query = "SELECT c FROM CartProduct c WHERE c.productId = :productId"),
+    @NamedQuery(name = "CartProduct.findByQuantity", query = "SELECT c FROM CartProduct c WHERE c.quantity = :quantity"),
+    @NamedQuery(name = "CartProduct.findByPrice", query = "SELECT c FROM CartProduct c WHERE c.price = :price")})
+public class CartProduct implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -51,10 +51,10 @@ public class Cartproduct implements Serializable {
     @ManyToOne
     private Cart cart;
 
-    public Cartproduct() {
+    public CartProduct() {
     }
 
-    public Cartproduct(Integer cartProductId) {
+    public CartProduct(Integer cartProductId) {
         this.cartProductId = cartProductId;
     }
 
@@ -108,10 +108,10 @@ public class Cartproduct implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Cartproduct)) {
+        if (!(object instanceof CartProduct)) {
             return false;
         }
-        Cartproduct other = (Cartproduct) object;
+        CartProduct other = (CartProduct) object;
         if ((this.cartProductId == null && other.cartProductId != null) || (this.cartProductId != null && !this.cartProductId.equals(other.cartProductId))) {
             return false;
         }
@@ -120,7 +120,7 @@ public class Cartproduct implements Serializable {
 
     @Override
     public String toString() {
-        return "domainmodel.Cartproduct[ cartProductId=" + cartProductId + " ]";
+        return "domainmodel.CartProduct[ cartProductId=" + cartProductId + " ]";
     }
     
 }

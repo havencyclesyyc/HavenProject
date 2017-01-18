@@ -46,9 +46,9 @@ public class Cart implements Serializable {
     @Column(name = "estimatedTaxes")
     private BigDecimal estimatedTaxes;
     @OneToMany(mappedBy = "cart")
-    private List<Purchaseorder> purchaseorderList;
+    private List<PurchaseOrder> purchaseOrderList;
     @OneToMany(mappedBy = "cart")
-    private List<Cartproduct> cartproductList;
+    private List<CartProduct> cartProductList;
 
     public Cart() {
     }
@@ -82,21 +82,21 @@ public class Cart implements Serializable {
     }
 
     @XmlTransient
-    public List<Purchaseorder> getPurchaseorderList() {
-        return purchaseorderList;
+    public List<PurchaseOrder> getPurchaseOrderList() {
+        return purchaseOrderList;
     }
 
-    public void setPurchaseorderList(List<Purchaseorder> purchaseorderList) {
-        this.purchaseorderList = purchaseorderList;
+    public void setPurchaseOrderList(List<PurchaseOrder> purchaseOrderList) {
+        this.purchaseOrderList = purchaseOrderList;
     }
 
     @XmlTransient
-    public List<Cartproduct> getCartproductList() {
-        return cartproductList;
+    public List<CartProduct> getCartProductList() {
+        return cartProductList;
     }
 
-    public void setCartproductList(List<Cartproduct> cartproductList) {
-        this.cartproductList = cartproductList;
+    public void setCartProductList(List<CartProduct> cartProductList) {
+        this.cartProductList = cartProductList;
     }
 
     @Override

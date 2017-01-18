@@ -29,13 +29,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "rentalorder")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Rentalorder.findAll", query = "SELECT r FROM Rentalorder r"),
-    @NamedQuery(name = "Rentalorder.findByRentalOrderId", query = "SELECT r FROM Rentalorder r WHERE r.rentalOrderId = :rentalOrderId"),
-    @NamedQuery(name = "Rentalorder.findByUserid", query = "SELECT r FROM Rentalorder r WHERE r.userid = :userid"),
-    @NamedQuery(name = "Rentalorder.findByEndDate", query = "SELECT r FROM Rentalorder r WHERE r.endDate = :endDate"),
-    @NamedQuery(name = "Rentalorder.findByStartDate", query = "SELECT r FROM Rentalorder r WHERE r.startDate = :startDate"),
-    @NamedQuery(name = "Rentalorder.findByStatus", query = "SELECT r FROM Rentalorder r WHERE r.status = :status")})
-public class Rentalorder implements Serializable {
+    @NamedQuery(name = "RentalOrder.findAll", query = "SELECT r FROM RentalOrder r"),
+    @NamedQuery(name = "RentalOrder.findByRentalOrderId", query = "SELECT r FROM RentalOrder r WHERE r.rentalOrderId = :rentalOrderId"),
+    @NamedQuery(name = "RentalOrder.findByUserid", query = "SELECT r FROM RentalOrder r WHERE r.userid = :userid"),
+    @NamedQuery(name = "RentalOrder.findByEndDate", query = "SELECT r FROM RentalOrder r WHERE r.endDate = :endDate"),
+    @NamedQuery(name = "RentalOrder.findByStartDate", query = "SELECT r FROM RentalOrder r WHERE r.startDate = :startDate"),
+    @NamedQuery(name = "RentalOrder.findByStatus", query = "SELECT r FROM RentalOrder r WHERE r.status = :status")})
+public class RentalOrder implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -55,15 +55,15 @@ public class Rentalorder implements Serializable {
     private Character status;
     @JoinColumn(name = "rentalBikeId", referencedColumnName = "rentalBikeId")
     @ManyToOne
-    private Rentalbike rentalBikeId;
+    private RentalBike rentalBikeId;
     @JoinColumn(name = "typeId", referencedColumnName = "rentalTypeId")
     @ManyToOne
-    private Rentaltype typeId;
+    private RentalType typeId;
 
-    public Rentalorder() {
+    public RentalOrder() {
     }
 
-    public Rentalorder(Integer rentalOrderId) {
+    public RentalOrder(Integer rentalOrderId) {
         this.rentalOrderId = rentalOrderId;
     }
 
@@ -107,19 +107,19 @@ public class Rentalorder implements Serializable {
         this.status = status;
     }
 
-    public Rentalbike getRentalBikeId() {
+    public RentalBike getRentalBikeId() {
         return rentalBikeId;
     }
 
-    public void setRentalBikeId(Rentalbike rentalBikeId) {
+    public void setRentalBikeId(RentalBike rentalBikeId) {
         this.rentalBikeId = rentalBikeId;
     }
 
-    public Rentaltype getTypeId() {
+    public RentalType getTypeId() {
         return typeId;
     }
 
-    public void setTypeId(Rentaltype typeId) {
+    public void setTypeId(RentalType typeId) {
         this.typeId = typeId;
     }
 
@@ -133,10 +133,10 @@ public class Rentalorder implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Rentalorder)) {
+        if (!(object instanceof RentalOrder)) {
             return false;
         }
-        Rentalorder other = (Rentalorder) object;
+        RentalOrder other = (RentalOrder) object;
         if ((this.rentalOrderId == null && other.rentalOrderId != null) || (this.rentalOrderId != null && !this.rentalOrderId.equals(other.rentalOrderId))) {
             return false;
         }
@@ -145,7 +145,7 @@ public class Rentalorder implements Serializable {
 
     @Override
     public String toString() {
-        return "domainmodel.Rentalorder[ rentalOrderId=" + rentalOrderId + " ]";
+        return "domainmodel.RentalOrder[ rentalOrderId=" + rentalOrderId + " ]";
     }
     
 }

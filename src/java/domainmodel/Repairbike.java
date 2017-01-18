@@ -29,16 +29,16 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "repairbike")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Repairbike.findAll", query = "SELECT r FROM Repairbike r"),
-    @NamedQuery(name = "Repairbike.findByRepairBikeId", query = "SELECT r FROM Repairbike r WHERE r.repairBikeId = :repairBikeId"),
-    @NamedQuery(name = "Repairbike.findByYear", query = "SELECT r FROM Repairbike r WHERE r.year = :year"),
-    @NamedQuery(name = "Repairbike.findByBrand", query = "SELECT r FROM Repairbike r WHERE r.brand = :brand"),
-    @NamedQuery(name = "Repairbike.findByModel", query = "SELECT r FROM Repairbike r WHERE r.model = :model"),
-    @NamedQuery(name = "Repairbike.findByType", query = "SELECT r FROM Repairbike r WHERE r.type = :type"),
-    @NamedQuery(name = "Repairbike.findBySize", query = "SELECT r FROM Repairbike r WHERE r.size = :size"),
-    @NamedQuery(name = "Repairbike.findByColor", query = "SELECT r FROM Repairbike r WHERE r.color = :color"),
-    @NamedQuery(name = "Repairbike.findBySeatHeight", query = "SELECT r FROM Repairbike r WHERE r.seatHeight = :seatHeight")})
-public class Repairbike implements Serializable {
+    @NamedQuery(name = "RepairBike.findAll", query = "SELECT r FROM RepairBike r"),
+    @NamedQuery(name = "RepairBike.findByRepairBikeId", query = "SELECT r FROM RepairBike r WHERE r.repairBikeId = :repairBikeId"),
+    @NamedQuery(name = "RepairBike.findByYear", query = "SELECT r FROM RepairBike r WHERE r.year = :year"),
+    @NamedQuery(name = "RepairBike.findByBrand", query = "SELECT r FROM RepairBike r WHERE r.brand = :brand"),
+    @NamedQuery(name = "RepairBike.findByModel", query = "SELECT r FROM RepairBike r WHERE r.model = :model"),
+    @NamedQuery(name = "RepairBike.findByType", query = "SELECT r FROM RepairBike r WHERE r.type = :type"),
+    @NamedQuery(name = "RepairBike.findBySize", query = "SELECT r FROM RepairBike r WHERE r.size = :size"),
+    @NamedQuery(name = "RepairBike.findByColor", query = "SELECT r FROM RepairBike r WHERE r.color = :color"),
+    @NamedQuery(name = "RepairBike.findBySeatHeight", query = "SELECT r FROM RepairBike r WHERE r.seatHeight = :seatHeight")})
+public class RepairBike implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -67,12 +67,12 @@ public class Repairbike implements Serializable {
     @Column(name = "seatHeight")
     private BigDecimal seatHeight;
     @OneToMany(mappedBy = "repairBikeId")
-    private List<Repairorder> repairorderList;
+    private List<RepairOrder> repairOrderList;
 
-    public Repairbike() {
+    public RepairBike() {
     }
 
-    public Repairbike(Integer repairBikeId) {
+    public RepairBike(Integer repairBikeId) {
         this.repairBikeId = repairBikeId;
     }
 
@@ -141,12 +141,12 @@ public class Repairbike implements Serializable {
     }
 
     @XmlTransient
-    public List<Repairorder> getRepairorderList() {
-        return repairorderList;
+    public List<RepairOrder> getRepairOrderList() {
+        return repairOrderList;
     }
 
-    public void setRepairorderList(List<Repairorder> repairorderList) {
-        this.repairorderList = repairorderList;
+    public void setRepairOrderList(List<RepairOrder> repairOrderList) {
+        this.repairOrderList = repairOrderList;
     }
 
     @Override
@@ -159,10 +159,10 @@ public class Repairbike implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Repairbike)) {
+        if (!(object instanceof RepairBike)) {
             return false;
         }
-        Repairbike other = (Repairbike) object;
+        RepairBike other = (RepairBike) object;
         if ((this.repairBikeId == null && other.repairBikeId != null) || (this.repairBikeId != null && !this.repairBikeId.equals(other.repairBikeId))) {
             return false;
         }
@@ -171,7 +171,7 @@ public class Repairbike implements Serializable {
 
     @Override
     public String toString() {
-        return "domainmodel.Repairbike[ repairBikeId=" + repairBikeId + " ]";
+        return "domainmodel.RepairBike[ repairBikeId=" + repairBikeId + " ]";
     }
     
 }

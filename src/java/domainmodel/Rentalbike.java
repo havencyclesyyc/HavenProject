@@ -28,16 +28,16 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "rentalbike")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Rentalbike.findAll", query = "SELECT r FROM Rentalbike r"),
-    @NamedQuery(name = "Rentalbike.findByRentalBikeId", query = "SELECT r FROM Rentalbike r WHERE r.rentalBikeId = :rentalBikeId"),
-    @NamedQuery(name = "Rentalbike.findByAvailable", query = "SELECT r FROM Rentalbike r WHERE r.available = :available"),
-    @NamedQuery(name = "Rentalbike.findByYear", query = "SELECT r FROM Rentalbike r WHERE r.year = :year"),
-    @NamedQuery(name = "Rentalbike.findByBrand", query = "SELECT r FROM Rentalbike r WHERE r.brand = :brand"),
-    @NamedQuery(name = "Rentalbike.findByModel", query = "SELECT r FROM Rentalbike r WHERE r.model = :model"),
-    @NamedQuery(name = "Rentalbike.findBySize", query = "SELECT r FROM Rentalbike r WHERE r.size = :size"),
-    @NamedQuery(name = "Rentalbike.findByColor", query = "SELECT r FROM Rentalbike r WHERE r.color = :color"),
-    @NamedQuery(name = "Rentalbike.findByDescription", query = "SELECT r FROM Rentalbike r WHERE r.description = :description")})
-public class Rentalbike implements Serializable {
+    @NamedQuery(name = "RentalBike.findAll", query = "SELECT r FROM RentalBike r"),
+    @NamedQuery(name = "RentalBike.findByRentalBikeId", query = "SELECT r FROM RentalBike r WHERE r.rentalBikeId = :rentalBikeId"),
+    @NamedQuery(name = "RentalBike.findByAvailable", query = "SELECT r FROM RentalBike r WHERE r.available = :available"),
+    @NamedQuery(name = "RentalBike.findByYear", query = "SELECT r FROM RentalBike r WHERE r.year = :year"),
+    @NamedQuery(name = "RentalBike.findByBrand", query = "SELECT r FROM RentalBike r WHERE r.brand = :brand"),
+    @NamedQuery(name = "RentalBike.findByModel", query = "SELECT r FROM RentalBike r WHERE r.model = :model"),
+    @NamedQuery(name = "RentalBike.findBySize", query = "SELECT r FROM RentalBike r WHERE r.size = :size"),
+    @NamedQuery(name = "RentalBike.findByColor", query = "SELECT r FROM RentalBike r WHERE r.color = :color"),
+    @NamedQuery(name = "RentalBike.findByDescription", query = "SELECT r FROM RentalBike r WHERE r.description = :description")})
+public class RentalBike implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -65,12 +65,12 @@ public class Rentalbike implements Serializable {
     @Column(name = "description")
     private String description;
     @OneToMany(mappedBy = "rentalBikeId")
-    private List<Rentalorder> rentalorderList;
+    private List<RentalOrder> rentalOrderList;
 
-    public Rentalbike() {
+    public RentalBike() {
     }
 
-    public Rentalbike(Integer rentalBikeId) {
+    public RentalBike(Integer rentalBikeId) {
         this.rentalBikeId = rentalBikeId;
     }
 
@@ -139,12 +139,12 @@ public class Rentalbike implements Serializable {
     }
 
     @XmlTransient
-    public List<Rentalorder> getRentalorderList() {
-        return rentalorderList;
+    public List<RentalOrder> getRentalOrderList() {
+        return rentalOrderList;
     }
 
-    public void setRentalorderList(List<Rentalorder> rentalorderList) {
-        this.rentalorderList = rentalorderList;
+    public void setRentalOrderList(List<RentalOrder> rentalOrderList) {
+        this.rentalOrderList = rentalOrderList;
     }
 
     @Override
@@ -157,10 +157,10 @@ public class Rentalbike implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Rentalbike)) {
+        if (!(object instanceof RentalBike)) {
             return false;
         }
-        Rentalbike other = (Rentalbike) object;
+        RentalBike other = (RentalBike) object;
         if ((this.rentalBikeId == null && other.rentalBikeId != null) || (this.rentalBikeId != null && !this.rentalBikeId.equals(other.rentalBikeId))) {
             return false;
         }
@@ -169,7 +169,7 @@ public class Rentalbike implements Serializable {
 
     @Override
     public String toString() {
-        return "domainmodel.Rentalbike[ rentalBikeId=" + rentalBikeId + " ]";
+        return "domainmodel.RentalBike[ rentalBikeId=" + rentalBikeId + " ]";
     }
     
 }
