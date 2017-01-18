@@ -29,10 +29,6 @@ ALTER TABLE User
   ADD CONSTRAINT `Unique_Email_Constraint`UNIQUE (email);
 
 ALTER TABLE RentalOrder
-  ADD CONSTRAINT `Valid_RentalOrder_Constraint`
-  FOREIGN KEY (userid)
-  REFERENCES User(userid),
-
   ADD CONSTRAINT `Valid_RentalType_Constraint`
   FOREIGN KEY (typeId)
   REFERENCES RentalType(rentalTypeId),
