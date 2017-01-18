@@ -119,21 +119,15 @@ CREATE TABLE PurchaseOrder (
   datePlaced Date,
   estimatedDelivery Date,
   status Char(1),
+  shipAndHandleCost NUMERIC(9, 2),
+  estimatedTaxes NUMERIC(9, 2),
 
   PRIMARY KEY (purchaseOrderId)
 );
 
-CREATE TABLE Cart (
-  cartid int(9),
-  shipAndHandleCost NUMERIC(9, 2),
-  estimatedTaxes NUMERIC(9, 2),
-
-  PRIMARY KEY (cartid)
-);
-
 CREATE TABLE CartProduct (
   cartProductId int(9),
-  cart int(9),
+  capurchaseOrderId int(9),
   productId int(9),
   quantity int(3),
   price NUMERIC(9,2),

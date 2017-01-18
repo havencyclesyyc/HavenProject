@@ -35,7 +35,11 @@ ALTER TABLE RentalOrder
 
   ADD CONSTRAINT `Valid_RentalBike_Constraint`
   FOREIGN KEY (rentalBikeId)
-  REFERENCES RentalBike(rentalBikeId);
+  REFERENCES RentalBike(rentalBikeId),
+
+  ADD CONSTRAINT `Valid_RentalOrder_Constraint`
+  FOREIGN KEY (userid)
+  REFERENCES User(userid);
 
 ALTER TABLE RepairOrder
   ADD CONSTRAINT `Valid_RepairOrder_Constraint`
@@ -49,13 +53,13 @@ ALTER TABLE RepairOrder
 ALTER TABLE PurchaseOrder
   ADD CONSTRAINT `Valid_PurchaseOrder_Constraint`
   FOREIGN KEY (userid)
-  REFERENCES User(userid),
-
-  ADD CONSTRAINT `Valid_Cart_Constraint`
-  FOREIGN KEY (cart)
-  REFERENCES Cart(cartid);
+  REFERENCES User(userid);
 
 ALTER TABLE CartProduct
   ADD CONSTRAINT `Valid_CartProduct_Constraint`
-  FOREIGN KEY (cart)
-  REFERENCES Cart(cartid);
+  FOREIGN KEY (productId)
+  REFERENCES Product(productId),
+
+  ADD CONSTRAINT `Valid_PurchaseOrder_Constraint`
+  FOREIGN KEY (purchaseOrderId)
+  REFERENCES PurchaseOrder(purchaseOrderId);
