@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author 545410
+ * @author 693663
  */
 @Entity
 @Table(name = "cartproduct")
@@ -29,7 +29,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "CartProduct.findAll", query = "SELECT c FROM CartProduct c"),
     @NamedQuery(name = "CartProduct.findByCartProductId", query = "SELECT c FROM CartProduct c WHERE c.cartProductId = :cartProductId"),
-    @NamedQuery(name = "CartProduct.findByProductId", query = "SELECT c FROM CartProduct c WHERE c.productId = :productId"),
     @NamedQuery(name = "CartProduct.findByQuantity", query = "SELECT c FROM CartProduct c WHERE c.quantity = :quantity"),
     @NamedQuery(name = "CartProduct.findByPrice", query = "SELECT c FROM CartProduct c WHERE c.price = :price")})
 public class CartProduct implements Serializable {
@@ -40,16 +39,17 @@ public class CartProduct implements Serializable {
     @NotNull
     @Column(name = "cartProductId")
     private Integer cartProductId;
-    @Column(name = "productId")
-    private Integer productId;
     @Column(name = "quantity")
     private Integer quantity;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "price")
     private BigDecimal price;
-    @JoinColumn(name = "cart", referencedColumnName = "cartid")
+    @JoinColumn(name = "productId", referencedColumnName = "productId")
     @ManyToOne
-    private Cart cart;
+    private Product productId;
+    @JoinColumn(name = "purchaseOrderId", referencedColumnName = "purchaseOrderId")
+    @ManyToOne
+    private PurchaseOrder purchaseOrderId;
 
     public CartProduct() {
     }
@@ -64,14 +64,6 @@ public class CartProduct implements Serializable {
 
     public void setCartProductId(Integer cartProductId) {
         this.cartProductId = cartProductId;
-    }
-
-    public Integer getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Integer productId) {
-        this.productId = productId;
     }
 
     public Integer getQuantity() {
@@ -90,12 +82,20 @@ public class CartProduct implements Serializable {
         this.price = price;
     }
 
-    public Cart getCart() {
-        return cart;
+    public Product getProductId() {
+        return productId;
     }
 
-    public void setCart(Cart cart) {
-        this.cart = cart;
+    public void setProductId(Product productId) {
+        this.productId = productId;
+    }
+
+    public PurchaseOrder getPurchaseOrderId() {
+        return purchaseOrderId;
+    }
+
+    public void setPurchaseOrderId(PurchaseOrder purchaseOrderId) {
+        this.purchaseOrderId = purchaseOrderId;
     }
 
     @Override
