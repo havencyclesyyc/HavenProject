@@ -6,7 +6,9 @@
 package domainmodel;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,15 +17,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author 545410
+ * @author 693663
  */
 @Entity
 @Table(name = "purchaseorder")
@@ -31,11 +35,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "PurchaseOrder.findAll", query = "SELECT p FROM PurchaseOrder p"),
     @NamedQuery(name = "PurchaseOrder.findByPurchaseOrderId", query = "SELECT p FROM PurchaseOrder p WHERE p.purchaseOrderId = :purchaseOrderId"),
+    @NamedQuery(name = "PurchaseOrder.findByCart", query = "SELECT p FROM PurchaseOrder p WHERE p.cart = :cart"),
     @NamedQuery(name = "PurchaseOrder.findByShippingAddress", query = "SELECT p FROM PurchaseOrder p WHERE p.shippingAddress = :shippingAddress"),
     @NamedQuery(name = "PurchaseOrder.findByBillingAddress", query = "SELECT p FROM PurchaseOrder p WHERE p.billingAddress = :billingAddress"),
     @NamedQuery(name = "PurchaseOrder.findByDatePlaced", query = "SELECT p FROM PurchaseOrder p WHERE p.datePlaced = :datePlaced"),
     @NamedQuery(name = "PurchaseOrder.findByEstimatedDelivery", query = "SELECT p FROM PurchaseOrder p WHERE p.estimatedDelivery = :estimatedDelivery"),
-    @NamedQuery(name = "PurchaseOrder.findByStatus", query = "SELECT p FROM PurchaseOrder p WHERE p.status = :status")})
+    @NamedQuery(name = "PurchaseOrder.findByStatus", query = "SELECT p FROM PurchaseOrder p WHERE p.status = :status"),
+    @NamedQuery(name = "PurchaseOrder.findByShipAndHandleCost", query = "SELECT p FROM PurchaseOrder p WHERE p.shipAndHandleCost = :shipAndHandleCost"),
+    @NamedQuery(name = "PurchaseOrder.findByEstimatedTaxes", query = "SELECT p FROM PurchaseOrder p WHERE p.estimatedTaxes = :estimatedTaxes")})
 public class PurchaseOrder implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -44,6 +51,8 @@ public class PurchaseOrder implements Serializable {
     @NotNull
     @Column(name = "purchaseOrderId")
     private Integer purchaseOrderId;
+    @Column(name = "cart")
+    private Integer cart;
     @Column(name = "shippingAddress")
     private Integer shippingAddress;
     @Column(name = "billingAddress")
@@ -56,12 +65,16 @@ public class PurchaseOrder implements Serializable {
     private Date estimatedDelivery;
     @Column(name = "status")
     private Character status;
-    @JoinColumn(name = "cart", referencedColumnName = "cartid")
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "shipAndHandleCost")
+    private BigDecimal shipAndHandleCost;
+    @Column(name = "estimatedTaxes")
+    private BigDecimal estimatedTaxes;
+    @JoinColumn(name = "userId", referencedColumnName = "userId")
     @ManyToOne
-    private Cart cart;
-    @JoinColumn(name = "userid", referencedColumnName = "userid")
-    @ManyToOne
-    private User userid;
+    private User userId;
+    @OneToMany(mappedBy = "purchaseOrderId")
+    private List<CartProduct> cartProductList;
 
     public PurchaseOrder() {
     }
@@ -76,6 +89,14 @@ public class PurchaseOrder implements Serializable {
 
     public void setPurchaseOrderId(Integer purchaseOrderId) {
         this.purchaseOrderId = purchaseOrderId;
+    }
+
+    public Integer getCart() {
+        return cart;
+    }
+
+    public void setCart(Integer cart) {
+        this.cart = cart;
     }
 
     public Integer getShippingAddress() {
@@ -118,20 +139,37 @@ public class PurchaseOrder implements Serializable {
         this.status = status;
     }
 
-    public Cart getCart() {
-        return cart;
+    public BigDecimal getShipAndHandleCost() {
+        return shipAndHandleCost;
     }
 
-    public void setCart(Cart cart) {
-        this.cart = cart;
+    public void setShipAndHandleCost(BigDecimal shipAndHandleCost) {
+        this.shipAndHandleCost = shipAndHandleCost;
     }
 
-    public User getUserid() {
-        return userid;
+    public BigDecimal getEstimatedTaxes() {
+        return estimatedTaxes;
     }
 
-    public void setUserid(User userid) {
-        this.userid = userid;
+    public void setEstimatedTaxes(BigDecimal estimatedTaxes) {
+        this.estimatedTaxes = estimatedTaxes;
+    }
+
+    public User getUserId() {
+        return userId;
+    }
+
+    public void setUserId(User userId) {
+        this.userId = userId;
+    }
+
+    @XmlTransient
+    public List<CartProduct> getCartProductList() {
+        return cartProductList;
+    }
+
+    public void setCartProductList(List<CartProduct> cartProductList) {
+        this.cartProductList = cartProductList;
     }
 
     @Override

@@ -14,9 +14,9 @@ CREATE DATABASE HavencyclesDB;
 
 USE HavencyclesDB;
 
-CREATE TABLE Address (
-  addressid int(9),
-  userid int(9),
+CREATE TABLE `Address` (
+  addressId int(9),
+  userId int(9),
   streetAddress VarChar(50),
   city VarChar(30),
   state VarChar(30),
@@ -26,21 +26,24 @@ CREATE TABLE Address (
   PRIMARY KEY (addressid)
 );
 
-CREATE TABLE Phone (
-  userid int(9),
+CREATE TABLE `Phone` (
+  phoneId int(9),
+  userId int(9),
   phoneNumber VarChar(10)
+
+  PRIMARY KEY(phoneId);
 );
 
-CREATE TABLE Role (
-  roleid int(2),
+CREATE TABLE `Role` (
+  roleId int(2),
   roleName VarChar(10),
 
   PRIMARY KEY (roleid)
 );
 
-CREATE TABLE User (
-  userid int(9),
-  roleid int(2),
+CREATE TABLE `User` (
+  userId int(9),
+  roleId int(2),
   email VarChar(30) Not Null,
   password VarChar(30) Not Null,
   firstName VarChar(25),
@@ -52,10 +55,10 @@ CREATE TABLE User (
   UNIQUE (email)
 );
 
-CREATE TABLE RentalOrder (
+CREATE TABLE `RentalOrder` (
   rentalOrderId int(9),
   typeId int(3),
-  userid int(9),
+  userId int(9),
   rentalBikeId int(9),
   endDate Date,
   startDate Date,
@@ -64,14 +67,14 @@ CREATE TABLE RentalOrder (
   PRIMARY KEY (rentalOrderId)
 );
 
-CREATE TABLE RentalType (
+CREATE TABLE `RentalType` (
   rentalTypeId int(3),
   ratePerDay NUMERIC(9,2),
 
   PRIMARY KEY (rentalTypeId)
 );
 
-CREATE TABLE RentalBike (
+CREATE TABLE `RentalBike` (
   rentalBikeId int(9),
   available Char(1),
   year int(4),
@@ -84,9 +87,9 @@ CREATE TABLE RentalBike (
   PRIMARY KEY (rentalBikeId)
 );
 
-CREATE TABLE RepairOrder (
+CREATE TABLE `RepairOrder` (
   repairOrderId int(9),
-  userid int(9),
+  userId int(9),
   repairBikeId int(9),
   endDate Date,
   startDate Date,
@@ -97,7 +100,7 @@ CREATE TABLE RepairOrder (
   PRIMARY KEY (repairOrderId)
 );
 
-CREATE TABLE RepairBike (
+CREATE TABLE `RepairBike` (
   repairBikeId int(9),
   year int(4),
   brand VarChar(25),
@@ -110,9 +113,9 @@ CREATE TABLE RepairBike (
   PRIMARY KEY (repairBikeId)
 );
 
-CREATE TABLE PurchaseOrder (
+CREATE TABLE `PurchaseOrder` (
   purchaseOrderId int(9),
-  userid int(9),
+  userId int(9),
   cart int(9),
   shippingAddress int(9),
   billingAddress int(9),
@@ -125,9 +128,9 @@ CREATE TABLE PurchaseOrder (
   PRIMARY KEY (purchaseOrderId)
 );
 
-CREATE TABLE CartProduct (
+CREATE TABLE `CartProduct` (
   cartProductId int(9),
-  capurchaseOrderId int(9),
+  purchaseOrderId int(9),
   productId int(9),
   quantity int(3),
   price NUMERIC(9,2),
@@ -135,7 +138,7 @@ CREATE TABLE CartProduct (
   PRIMARY KEY (cartProductId)
 );
 
-CREATE TABLE Product (
+CREATE TABLE `Product` (
   productId int(9),
   name VarChar(100),
   description VarChar(2000),

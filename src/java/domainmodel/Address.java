@@ -21,14 +21,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author 545410
+ * @author 693663
  */
 @Entity
 @Table(name = "address")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Address.findAll", query = "SELECT a FROM Address a"),
-    @NamedQuery(name = "Address.findByAddressid", query = "SELECT a FROM Address a WHERE a.addressid = :addressid"),
+    @NamedQuery(name = "Address.findByAddressId", query = "SELECT a FROM Address a WHERE a.addressId = :addressId"),
     @NamedQuery(name = "Address.findByStreetAddress", query = "SELECT a FROM Address a WHERE a.streetAddress = :streetAddress"),
     @NamedQuery(name = "Address.findByCity", query = "SELECT a FROM Address a WHERE a.city = :city"),
     @NamedQuery(name = "Address.findByState", query = "SELECT a FROM Address a WHERE a.state = :state"),
@@ -40,8 +40,8 @@ public class Address implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "addressid")
-    private Integer addressid;
+    @Column(name = "addressId")
+    private Integer addressId;
     @Size(max = 50)
     @Column(name = "streetAddress")
     private String streetAddress;
@@ -57,23 +57,23 @@ public class Address implements Serializable {
     @Size(max = 9)
     @Column(name = "zipCode")
     private String zipCode;
-    @JoinColumn(name = "userid", referencedColumnName = "userid")
+    @JoinColumn(name = "userId", referencedColumnName = "userId")
     @ManyToOne
-    private User userid;
+    private User userId;
 
     public Address() {
     }
 
-    public Address(Integer addressid) {
-        this.addressid = addressid;
+    public Address(Integer addressId) {
+        this.addressId = addressId;
     }
 
-    public Integer getAddressid() {
-        return addressid;
+    public Integer getAddressId() {
+        return addressId;
     }
 
-    public void setAddressid(Integer addressid) {
-        this.addressid = addressid;
+    public void setAddressId(Integer addressId) {
+        this.addressId = addressId;
     }
 
     public String getStreetAddress() {
@@ -116,18 +116,18 @@ public class Address implements Serializable {
         this.zipCode = zipCode;
     }
 
-    public User getUserid() {
-        return userid;
+    public User getUserId() {
+        return userId;
     }
 
-    public void setUserid(User userid) {
-        this.userid = userid;
+    public void setUserId(User userId) {
+        this.userId = userId;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (addressid != null ? addressid.hashCode() : 0);
+        hash += (addressId != null ? addressId.hashCode() : 0);
         return hash;
     }
 
@@ -138,7 +138,7 @@ public class Address implements Serializable {
             return false;
         }
         Address other = (Address) object;
-        if ((this.addressid == null && other.addressid != null) || (this.addressid != null && !this.addressid.equals(other.addressid))) {
+        if ((this.addressId == null && other.addressId != null) || (this.addressId != null && !this.addressId.equals(other.addressId))) {
             return false;
         }
         return true;
@@ -146,7 +146,7 @@ public class Address implements Serializable {
 
     @Override
     public String toString() {
-        return "domainmodel.Address[ addressid=" + addressid + " ]";
+        return "domainmodel.Address[ addressId=" + addressId + " ]";
     }
     
 }

@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author 545410
+ * @author 693663
  */
 @Entity
 @Table(name = "rentalorder")
@@ -31,7 +31,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "RentalOrder.findAll", query = "SELECT r FROM RentalOrder r"),
     @NamedQuery(name = "RentalOrder.findByRentalOrderId", query = "SELECT r FROM RentalOrder r WHERE r.rentalOrderId = :rentalOrderId"),
-    @NamedQuery(name = "RentalOrder.findByUserid", query = "SELECT r FROM RentalOrder r WHERE r.userid = :userid"),
     @NamedQuery(name = "RentalOrder.findByEndDate", query = "SELECT r FROM RentalOrder r WHERE r.endDate = :endDate"),
     @NamedQuery(name = "RentalOrder.findByStartDate", query = "SELECT r FROM RentalOrder r WHERE r.startDate = :startDate"),
     @NamedQuery(name = "RentalOrder.findByStatus", query = "SELECT r FROM RentalOrder r WHERE r.status = :status")})
@@ -43,8 +42,6 @@ public class RentalOrder implements Serializable {
     @NotNull
     @Column(name = "rentalOrderId")
     private Integer rentalOrderId;
-    @Column(name = "userid")
-    private Integer userid;
     @Column(name = "endDate")
     @Temporal(TemporalType.DATE)
     private Date endDate;
@@ -56,6 +53,9 @@ public class RentalOrder implements Serializable {
     @JoinColumn(name = "rentalBikeId", referencedColumnName = "rentalBikeId")
     @ManyToOne
     private RentalBike rentalBikeId;
+    @JoinColumn(name = "userId", referencedColumnName = "userId")
+    @ManyToOne
+    private User userId;
     @JoinColumn(name = "typeId", referencedColumnName = "rentalTypeId")
     @ManyToOne
     private RentalType typeId;
@@ -73,14 +73,6 @@ public class RentalOrder implements Serializable {
 
     public void setRentalOrderId(Integer rentalOrderId) {
         this.rentalOrderId = rentalOrderId;
-    }
-
-    public Integer getUserid() {
-        return userid;
-    }
-
-    public void setUserid(Integer userid) {
-        this.userid = userid;
     }
 
     public Date getEndDate() {
@@ -113,6 +105,14 @@ public class RentalOrder implements Serializable {
 
     public void setRentalBikeId(RentalBike rentalBikeId) {
         this.rentalBikeId = rentalBikeId;
+    }
+
+    public User getUserId() {
+        return userId;
+    }
+
+    public void setUserId(User userId) {
+        this.userId = userId;
     }
 
     public RentalType getTypeId() {

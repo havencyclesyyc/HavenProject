@@ -11,24 +11,24 @@
 
 USE HavencyclesDB;
 
-ALTER TABLE Address
+ALTER TABLE `Address`
   ADD CONSTRAINT `Valid_Address_Constraint`
-  FOREIGN KEY (userid)
-  REFERENCES User(userid);
+  FOREIGN KEY (userId)
+  REFERENCES User(userId);
 
-ALTER TABLE Phone
+ALTER TABLE `Phone`
   ADD CONSTRAINT `Valid_Phone_Constraint`
-  FOREIGN KEY (userid)
-  REFERENCES User(userid);
+  FOREIGN KEY (userId)
+  REFERENCES User(userId);
 
-ALTER TABLE User
+ALTER TABLE `User`
   ADD CONSTRAINT `Valid_Role_Constraint`
-  FOREIGN KEY (roleid)
-  REFERENCES Role(roleid),
+  FOREIGN KEY (roleId)
+  REFERENCES Role(roleId),
 
   ADD CONSTRAINT `Unique_Email_Constraint`UNIQUE (email);
 
-ALTER TABLE RentalOrder
+ALTER TABLE `RentalOrder`
   ADD CONSTRAINT `Valid_RentalType_Constraint`
   FOREIGN KEY (typeId)
   REFERENCES RentalType(rentalTypeId),
@@ -38,24 +38,24 @@ ALTER TABLE RentalOrder
   REFERENCES RentalBike(rentalBikeId),
 
   ADD CONSTRAINT `Valid_RentalOrder_Constraint`
-  FOREIGN KEY (userid)
-  REFERENCES User(userid);
+  FOREIGN KEY (userId)
+  REFERENCES User(userId);
 
-ALTER TABLE RepairOrder
+ALTER TABLE `RepairOrder`
   ADD CONSTRAINT `Valid_RepairOrder_Constraint`
-  FOREIGN KEY (userid)
-  REFERENCES User(userid),
+  FOREIGN KEY (userId)
+  REFERENCES User(userId),
 
   ADD CONSTRAINT `Valid_RepairBike_Constraint`
   FOREIGN KEY (repairBikeId)
   REFERENCES RepairBike(repairBikeId);
 
-ALTER TABLE PurchaseOrder
-  ADD CONSTRAINT `Valid_PurchaseOrder_Constraint`
-  FOREIGN KEY (userid)
-  REFERENCES User(userid);
+ALTER TABLE `PurchaseOrder`
+  ADD CONSTRAINT `Valid_PurchaseOrderUser_Constraint`
+  FOREIGN KEY (userId)
+  REFERENCES User(userId);
 
-ALTER TABLE CartProduct
+ALTER TABLE `CartProduct`
   ADD CONSTRAINT `Valid_CartProduct_Constraint`
   FOREIGN KEY (productId)
   REFERENCES Product(productId),

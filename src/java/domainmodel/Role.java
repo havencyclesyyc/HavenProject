@@ -22,14 +22,14 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author 545410
+ * @author 693663
  */
 @Entity
 @Table(name = "role")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Role.findAll", query = "SELECT r FROM Role r"),
-    @NamedQuery(name = "Role.findByRoleid", query = "SELECT r FROM Role r WHERE r.roleid = :roleid"),
+    @NamedQuery(name = "Role.findByRoleId", query = "SELECT r FROM Role r WHERE r.roleId = :roleId"),
     @NamedQuery(name = "Role.findByRoleName", query = "SELECT r FROM Role r WHERE r.roleName = :roleName")})
 public class Role implements Serializable {
 
@@ -37,27 +37,27 @@ public class Role implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "roleid")
-    private Integer roleid;
+    @Column(name = "roleId")
+    private Integer roleId;
     @Size(max = 10)
     @Column(name = "roleName")
     private String roleName;
-    @OneToMany(mappedBy = "roleid")
+    @OneToMany(mappedBy = "roleId")
     private List<User> userList;
 
     public Role() {
     }
 
-    public Role(Integer roleid) {
-        this.roleid = roleid;
+    public Role(Integer roleId) {
+        this.roleId = roleId;
     }
 
-    public Integer getRoleid() {
-        return roleid;
+    public Integer getRoleId() {
+        return roleId;
     }
 
-    public void setRoleid(Integer roleid) {
-        this.roleid = roleid;
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
     }
 
     public String getRoleName() {
@@ -80,7 +80,7 @@ public class Role implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (roleid != null ? roleid.hashCode() : 0);
+        hash += (roleId != null ? roleId.hashCode() : 0);
         return hash;
     }
 
@@ -91,7 +91,7 @@ public class Role implements Serializable {
             return false;
         }
         Role other = (Role) object;
-        if ((this.roleid == null && other.roleid != null) || (this.roleid != null && !this.roleid.equals(other.roleid))) {
+        if ((this.roleId == null && other.roleId != null) || (this.roleId != null && !this.roleId.equals(other.roleId))) {
             return false;
         }
         return true;
@@ -99,7 +99,7 @@ public class Role implements Serializable {
 
     @Override
     public String toString() {
-        return "domainmodel.Role[ roleid=" + roleid + " ]";
+        return "domainmodel.Role[ roleId=" + roleId + " ]";
     }
     
 }

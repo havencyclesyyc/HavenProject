@@ -24,14 +24,14 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author 545410
+ * @author 693663
  */
 @Entity
 @Table(name = "user")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
-    @NamedQuery(name = "User.findByUserid", query = "SELECT u FROM User u WHERE u.userid = :userid"),
+    @NamedQuery(name = "User.findByUserId", query = "SELECT u FROM User u WHERE u.userId = :userId"),
     @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email"),
     @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password"),
     @NamedQuery(name = "User.findByFirstName", query = "SELECT u FROM User u WHERE u.firstName = :firstName"),
@@ -44,8 +44,8 @@ public class User implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "userid")
-    private Integer userid;
+    @Column(name = "userId")
+    private Integer userId;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
     @NotNull
@@ -69,35 +69,37 @@ public class User implements Serializable {
     @Size(max = 50)
     @Column(name = "registerUUID")
     private String registerUUID;
-    @OneToMany(mappedBy = "userid")
+    @OneToMany(mappedBy = "userId")
+    private List<RentalOrder> rentalOrderList;
+    @OneToMany(mappedBy = "userId")
     private List<Address> addressList;
-    @OneToMany(mappedBy = "userid")
+    @OneToMany(mappedBy = "userId")
     private List<PurchaseOrder> purchaseOrderList;
-    @OneToMany(mappedBy = "userid")
+    @OneToMany(mappedBy = "userId")
     private List<RepairOrder> repairOrderList;
-    @JoinColumn(name = "roleid", referencedColumnName = "roleid")
+    @JoinColumn(name = "roleId", referencedColumnName = "roleId")
     @ManyToOne
-    private Role roleid;
+    private Role roleId;
 
     public User() {
     }
 
-    public User(Integer userid) {
-        this.userid = userid;
+    public User(Integer userId) {
+        this.userId = userId;
     }
 
-    public User(Integer userid, String email, String password) {
-        this.userid = userid;
+    public User(Integer userId, String email, String password) {
+        this.userId = userId;
         this.email = email;
         this.password = password;
     }
 
-    public Integer getUserid() {
-        return userid;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUserid(Integer userid) {
-        this.userid = userid;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public String getEmail() {
@@ -149,6 +151,15 @@ public class User implements Serializable {
     }
 
     @XmlTransient
+    public List<RentalOrder> getRentalOrderList() {
+        return rentalOrderList;
+    }
+
+    public void setRentalOrderList(List<RentalOrder> rentalOrderList) {
+        this.rentalOrderList = rentalOrderList;
+    }
+
+    @XmlTransient
     public List<Address> getAddressList() {
         return addressList;
     }
@@ -175,18 +186,18 @@ public class User implements Serializable {
         this.repairOrderList = repairOrderList;
     }
 
-    public Role getRoleid() {
-        return roleid;
+    public Role getRoleId() {
+        return roleId;
     }
 
-    public void setRoleid(Role roleid) {
-        this.roleid = roleid;
+    public void setRoleId(Role roleId) {
+        this.roleId = roleId;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (userid != null ? userid.hashCode() : 0);
+        hash += (userId != null ? userId.hashCode() : 0);
         return hash;
     }
 
@@ -197,7 +208,7 @@ public class User implements Serializable {
             return false;
         }
         User other = (User) object;
-        if ((this.userid == null && other.userid != null) || (this.userid != null && !this.userid.equals(other.userid))) {
+        if ((this.userId == null && other.userId != null) || (this.userId != null && !this.userId.equals(other.userId))) {
             return false;
         }
         return true;
@@ -205,7 +216,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "domainmodel.User[ userid=" + userid + " ]";
+        return "domainmodel.User[ userId=" + userId + " ]";
     }
     
 }

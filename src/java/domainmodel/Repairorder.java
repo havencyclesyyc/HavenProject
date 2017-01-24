@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author 545410
+ * @author 693663
  */
 @Entity
 @Table(name = "repairorder")
@@ -63,9 +63,9 @@ public class RepairOrder implements Serializable {
     @JoinColumn(name = "repairBikeId", referencedColumnName = "repairBikeId")
     @ManyToOne
     private RepairBike repairBikeId;
-    @JoinColumn(name = "userid", referencedColumnName = "userid")
+    @JoinColumn(name = "userId", referencedColumnName = "userId")
     @ManyToOne
-    private User userid;
+    private User userId;
 
     public RepairOrder() {
     }
@@ -130,12 +130,12 @@ public class RepairOrder implements Serializable {
         this.repairBikeId = repairBikeId;
     }
 
-    public User getUserid() {
-        return userid;
+    public User getUserId() {
+        return userId;
     }
 
-    public void setUserid(User userid) {
-        this.userid = userid;
+    public void setUserId(User userId) {
+        this.userId = userId;
     }
 
     @Override

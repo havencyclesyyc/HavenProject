@@ -7,20 +7,23 @@ package domainmodel;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author 545410
+ * @author 693663
  */
 @Entity
 @Table(name = "product")
@@ -65,6 +68,8 @@ public class Product implements Serializable {
     private BigDecimal weight;
     @Column(name = "height")
     private BigDecimal height;
+    @OneToMany(mappedBy = "productId")
+    private List<CartProduct> cartProductList;
 
     public Product() {
     }
@@ -143,6 +148,15 @@ public class Product implements Serializable {
 
     public void setHeight(BigDecimal height) {
         this.height = height;
+    }
+
+    @XmlTransient
+    public List<CartProduct> getCartProductList() {
+        return cartProductList;
+    }
+
+    public void setCartProductList(List<CartProduct> cartProductList) {
+        this.cartProductList = cartProductList;
     }
 
     @Override
