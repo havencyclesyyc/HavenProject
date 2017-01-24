@@ -5,11 +5,13 @@
  */
 package servlets;
 
-import businesslogic.AccountService;
 import businesslogic.UserService;
 import dataaccess.HavenCyclesDBException;
+import domainmodel.Address;
+import domainmodel.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -35,14 +37,26 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        String action = request.getParameter("action");
+        request.setAttribute("role", "anonymous");
         
-        String logout = request.getParameter("logout");
-        if (logout != null) {
-            HttpSession session = request.getSession();
-            session.invalidate();
+        if (session.getAttribute("user") == null && action == null) {
+            getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
+            return;
         }
         
-        getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+        if(action != null && action.equals("login")) {
+            getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+            return;
+        }
+        
+        if (action != null && action.equals("logout")) {
+            session.invalidate();
+            request.setAttribute("role", "anonymous");
+            getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
+            return;
+        }
     }
 
     /**
@@ -56,48 +70,61 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        UserService us = new UserService();
-            
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
-            
-            String newUsernameInput  = request.getParameter("new-username-input");
-            String newPasswordInput  = request.getParameter("new-password-input");
-            String newEmailInput  = request.getParameter("new-email-input");
-            String newFirstNameInput  = request.getParameter("new-first-name-input");
-            String newLastNameInput  = request.getParameter("new-last-name-input");
-            String newPhoneNumber  = request.getParameter("new-phone-number-input");
-            String newGenderInput  = request.getParameter("new-gender-input");
-            
-            AccountService as = new AccountService();
-            String action = request.getParameter("action");
-            if (action == null)
-                action = "";
-            
-            switch (action) {
+        
+        String action = request.getParameter("action");        
+        UserService userService = new UserService();
+
+        switch(action) {
             case "login":
-                if (as.login(request, username, password)) {
-                    if(as.getRole(request)){
-                        response.sendRedirect("users");
-                    } else {
-                        response.sendRedirect("home");
-                    }
+                String email = request.getParameter("email-input");
+                String password = request.getParameter("password-input");
+                if(userService.login(email, password)) {
+                    HttpSession session = request.getSession(true);
+                    session.setAttribute("user", 1);
+                    session.setAttribute("role", "customer");
+                    response.sendRedirect("profile");
+                    return;
                 } else {
-                    request.setAttribute("message", "invalid login");
-                    getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+                    request.setAttribute("helpText", "Either the username or password you have entered in incorrect.");
+                    request.setAttribute("correct", "false");
+                    getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);  
                 }
-                
                 break;
-            
             case "register":
-                try {
-                    us.insert(newUsernameInput, newPasswordInput, newEmailInput, newFirstNameInput, newLastNameInput, newPhoneNumber, newGenderInput);
-                } catch (HavenCyclesDBException ex) {
-                    Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                User user = new User();
+                
+                String firstNameInput = request.getParameter("first-name-input");
+                String lastNameInput = request.getParameter("last-name-input");
+                String emailInput = request.getParameter("email-input");
+                String passwordInput = request.getParameter("password-input");
+                String phoneNumberInput = request.getParameter("phone-number-input");
+                String zipCodeInput = request.getParameter("zip-code-input");
+                String streetAddressInput = request.getParameter("street-address-input");
+                String cityInput = request.getParameter("city-input");
+                String stateInput = request.getParameter("state-input");
+                String countryInput = request.getParameter("country-input");
+                
+                ArrayList<Address> addressList = new ArrayList<Address>();
+                Address address = new Address();
+                address.setCity(cityInput);
+                address.setCountry(countryInput);
+                address.setState(stateInput);
+                address.setStreetAddress(streetAddressInput);
+                address.setZipCode(zipCodeInput);
+                addressList.add(address);
+                
+                // user.setPhoneNumber(phoneNumberInput);
+                user.setEmail(emailInput);
+                user.setPassword(passwordInput);
+                user.setFirstName(firstNameInput);
+                user.setLastName(lastNameInput);
+                user.setAddressList(addressList);
+                
+                request.setAttribute("helpText", "You have now been registered, and can now login with your new account.");
                 getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
                 break;
-            }
+        }
+        
     }
 
 }

@@ -17,3 +17,6 @@
         <p>havencyclesnyc@gmail.com - 347 529 4621</p>
     </div>
 </footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="bootstrap/js/bootstrap.js"></script>

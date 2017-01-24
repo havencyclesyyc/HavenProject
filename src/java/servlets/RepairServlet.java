@@ -11,13 +11,15 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Andrew Crayden
+ * @author 545410
  */
-public class HomeServlet extends HttpServlet {
-    
+public class RepairServlet extends HttpServlet {
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -29,7 +31,17 @@ public class HomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
+        HttpSession session = request.getSession();
+        
+        if (session.getAttribute("user") == null) {
+            request.setAttribute("role", "anonymous");
+        }
+        
+        if(session.getAttribute("user") != null) {
+            request.setAttribute("role", "customer");
+        }
+        
+        getServletContext().getRequestDispatcher("/WEB-INF/repairs.jsp").forward(request, response);
     }
 
     /**
@@ -45,4 +57,5 @@ public class HomeServlet extends HttpServlet {
             throws ServletException, IOException {
         
     }
+
 }

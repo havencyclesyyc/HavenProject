@@ -1,18 +1,17 @@
 <%-- 
-    Document   : rentals
-    Created on : Jan 16, 2017, 3:35:49 PM
-    Author     : Andrew Crayden
+    Document   : repairs
+    Created on : Jan 23, 2017, 4:29:19 PM
+    Author     : 545410
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="haven" %>
-
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Rentals - Haven Cycles</title>
+        <title>Repairs - Haven Cycles</title>
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
         <link rel="stylesheet" href="css/styles.css"/>
@@ -20,10 +19,11 @@
     <body>
         <haven:header />
         
-         <div id="main">
+        <div id="main">
             
             <div class="container">
-                <h1>Rent Bike</h1>
+                
+                <h1>Repairs</h1>
                 
                 <c:if test="${role eq 'customer'}">
                 <form class="form">
@@ -62,20 +62,8 @@
                         </select>
                       </div>
                       <div class="form-group col-md-6">
-                        <label>Start time</label>
-                        <input type="datetime-local" class="form-control">
-                      </div>
-                      <div class="form-group col-md-6">
-                        <label>End time</label>
-                        <input type="datetime-local" class="form-control">
-                      </div>
-                      <div class="form-group col-md-6">
-                        <label><input type="checkbox">
-                          Lock</label>
-                      </div>
-                      <div class="form-group col-md-6">
-                        <label><input type="checkbox">
-                          Helmet</label>
+                        <label>Comments</label>
+                        <textarea class="form-control" rows="10"></textarea>
                       </div>
                     </div>
                     <div class="row">
@@ -92,15 +80,14 @@
                   </form>
                 </c:if>
                 
-                <h2>Rental information goes here for unauthenticated users.</h2>
+                <h2>Bike repair information goes here for unauthenticated users.</h2>
                 <c:if test="${role eq 'anonymous'}">
-                    <a href="login">Login to create a bike rental order.</a>
+                    <a href="login">Login to create a bike repair request order.</a>
                 </c:if>
                 
             </div>
-             
-         </div>
-        
+            
+        </div>
         <haven:footer />
     </body>
 </html>

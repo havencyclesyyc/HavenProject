@@ -1,7 +1,7 @@
 <%-- 
     Document   : rentals
     Created on : Jan 16, 2017, 3:35:49 PM
-    Author     : 545410
+    Author     : Andrew Crayden
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -12,7 +12,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Rentals - Haven Cycles</title>
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
         <link rel="stylesheet" href="css/styles.css"/>
     </head>
@@ -24,30 +25,31 @@
             <div class="container">
                 <h1>Rent Bike</h1>
                 
+                <c:if test="${role eq 'customer'}">
                 <form class="form">
                     <div class="row">
                       <div class="form-group col-md-6">
-                        <label for="">First name</label>
-                        <input type="text" class="form-control" id="" placeholder="">
+                        <label>First name</label>
+                        <input type="text" class="form-control">
                       </div>
                       <div class="form-group col-md-6">
-                        <label for="">Last name</label>
-                        <input type="text" class="form-control" id="" placeholder="">
+                        <label>Last name</label>
+                        <input type="text" class="form-control">
                       </div>
                       <div class="form-group col-md-6">
-                        <label for="">Email</label>
-                        <input type="email" class="form-control" id="" placeholder="">
+                        <label>Email</label>
+                        <input type="email" class="form-control">
                       </div>
                       <div class="form-group col-md-6">
-                        <label for="">Phone number</label>
-                        <input type="tel" class="form-control" id="" placeholder="">
+                        <label>Phone number</label>
+                        <input type="tel" class="form-control">
                       </div>
                       <div class="form-group col-md-6">
-                        <label for="">Date of birth</label>
-                        <input type="date" class="form-control" id="" placeholder="">
+                        <label>Date of birth</label>
+                        <input type="date" class="form-control">
                       </div>
                       <div class="form-group col-md-6">
-                        <label for="">Bike Type</label>
+                        <label>Bike Type</label>
                         <select class="form-control">
                           <option>BMX</option>
                           <option>Cruiser</option>
@@ -60,34 +62,41 @@
                         </select>
                       </div>
                       <div class="form-group col-md-6">
-                        <label for="">Start time</label>
-                        <input type="datetime-local" class="form-control" id="" placeholder="">
+                        <label>Start time</label>
+                        <input type="datetime-local" class="form-control">
                       </div>
                       <div class="form-group col-md-6">
-                        <label for="">End time</label>
-                        <input type="datetime-local" class="form-control" id="" placeholder="">
+                        <label>End time</label>
+                        <input type="datetime-local" class="form-control">
                       </div>
                       <div class="form-group col-md-6">
-                        <label for=""><input type="checkbox" id="">
+                        <label><input type="checkbox">
                           Lock</label>
                       </div>
                       <div class="form-group col-md-6">
-                        <label for=""><input type="checkbox" id="">
+                        <label><input type="checkbox">
                           Helmet</label>
                       </div>
                     </div>
                     <div class="row">
                       <div class="form-group col-md-6">
-                        <label for="">Security deposit</label>
-                        <input type="number" step="0.01" class="form-control" id="" placeholder="" readonly>
+                        <label>Security deposit</label>
+                        <input type="number" step="0.01" class="form-control" readonly>
                       </div>
                       <div class="form-group col-md-6">
-                        <label for="">Total rental amount</label>
-                        <input type="number" step="0.01" class="form-control" id="" placeholder="">
+                        <label>Total rental amount</label>
+                        <input type="number" step="0.01" class="form-control">
                       </div>
                     </div>
-                      <input type="submit" class="btn btn-success" id="" value="Submit">
+                      <input type="submit" class="btn btn-success" value="Submit">
                   </form>
+                </c:if>
+                
+                <h2>Rental information goes here for unauthenticated users.</h2>
+                <c:if test="${role eq 'anonymous'}">
+                    <a href="login">Login to create a bike rental order.</a>
+                </c:if>
+                
             </div>
              
          </div>

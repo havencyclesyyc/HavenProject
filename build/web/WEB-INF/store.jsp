@@ -1,7 +1,7 @@
 <%-- 
     Document   : store
     Created on : Jan 16, 2017, 2:32:27 PM
-    Author     : 545410
+    Author     : Andrew Crayden
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -12,7 +12,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Haven Cycles - Store</title>
+        <title>Store - Haven Cycles</title>
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
         <link rel="stylesheet" href="css/styles.css"/>
     </head>
@@ -44,7 +45,5 @@
             
         </div>
         <haven:footer />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script src="bootstrap/js/bootstrap.js"></script>
     </body>
 </html>
