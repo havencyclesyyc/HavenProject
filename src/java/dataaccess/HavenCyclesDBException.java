@@ -9,6 +9,6 @@ package dataaccess;
  *
  * @author 545410
  */
-public class HavenCyclesDBException {
+public class HavenCyclesDBException extends Exception{
     
 }
