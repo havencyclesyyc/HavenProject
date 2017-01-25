@@ -47,7 +47,20 @@ public class UserService {
     }
     
     public User getUser(String email) {
-        return new User();
+        User user = new User();
+        Role role = new Role();
+        
+        role.setRoleId(1);
+        role.setRoleName("User");
+        
+        user.setUserId(1);
+        user.setEmail(email);
+        user.setPassword("password");
+        user.setFirstName("Bob");
+        user.setLastName("Dole");
+        user.setRoleId(role);
+        
+        return user;
     }
     
     public boolean isAdmin(int userid) {
@@ -67,6 +80,9 @@ public class UserService {
     }
     
     public Role getRole(int userId) {
-        return null;
+        Role role = new Role();
+        role.setRoleId(1);
+        role.setRoleName("anonymous");
+        return role;
     }
 }

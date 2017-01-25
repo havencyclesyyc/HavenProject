@@ -8,6 +8,7 @@ package servlets;
 import businesslogic.UserService;
 import dataaccess.HavenCyclesDBException;
 import domainmodel.Address;
+import domainmodel.Role;
 import domainmodel.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -73,6 +74,7 @@ public class LoginServlet extends HttpServlet {
         
         String action = request.getParameter("action");        
         UserService userService = new UserService();
+        int userId;
 
         switch(action) {
             case "login":
@@ -80,9 +82,11 @@ public class LoginServlet extends HttpServlet {
                 String password = request.getParameter("password-input");
                 if(userService.login(email, password)) {
                     HttpSession session = request.getSession(true);
-                    session.setAttribute("userId", 1);
-                    session.setAttribute("role", "customer");
+                    User user = userService.getUser("email-input");
+                    userId = user.getUserId();
+                    request.setAttribute("role", userService.getRole(userId).getRoleName());
                     response.sendRedirect("profile");
+                    
                     return;
                 } else {
                     request.setAttribute("helpText", "Either the username or password you have entered in incorrect.");

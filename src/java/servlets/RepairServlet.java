@@ -5,6 +5,8 @@
  */
 package servlets;
 
+import businesslogic.UserService;
+import domainmodel.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -31,15 +33,15 @@ public class RepairServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         HttpSession session = request.getSession();
+        String action = request.getParameter("action");        
+        UserService userService = new UserService();
+        int userId;
         
-        if (session.getAttribute("user") == null) {
-            request.setAttribute("role", "anonymous");
-        }
-        
-        if(session.getAttribute("user") != null) {
-            request.setAttribute("role", "customer");
-        }
+        User user = userService.getUser("email-input");
+        userId = user.getUserId();
+        request.setAttribute("role", userService.getRole(userId).getRoleName());
         
         getServletContext().getRequestDispatcher("/WEB-INF/repairs.jsp").forward(request, response);
     }
