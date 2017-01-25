@@ -80,7 +80,7 @@ public class LoginServlet extends HttpServlet {
                 String password = request.getParameter("password-input");
                 if(userService.login(email, password)) {
                     HttpSession session = request.getSession(true);
-                    session.setAttribute("user", 1);
+                    session.setAttribute("userId", 1);
                     session.setAttribute("role", "customer");
                     response.sendRedirect("profile");
                     return;

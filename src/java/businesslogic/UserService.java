@@ -5,6 +5,7 @@
  */
 package businesslogic;
 
+import domainmodel.Role;
 import domainmodel.User;
 import java.util.ArrayList;
 import java.util.List;
@@ -65,7 +66,7 @@ public class UserService {
         return true;
     }
     
-    public boolean getRole(int userId) {
-        return true;
+    public Role getRole(int userId) {
+        return null;
     }
 }

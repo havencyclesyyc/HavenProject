@@ -5,6 +5,9 @@
  */
 package servlets;
 
+import businesslogic.UserService;
+import domainmodel.Role;
+import domainmodel.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -31,17 +34,12 @@ public class RentalServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
+        int userId = Integer.parseInt((String)session.getAttribute("userId"));
+        UserService us = new UserService();
         
-        if (session.getAttribute("user") == null) {
-            request.setAttribute("role", "anonymous");
-        }
+        request.setAttribute("role", us.getRole(userId).getRoleName());
         
-        if(session.getAttribute("user") != null) {
-            request.setAttribute("role", "customer");
-        }
-        
-        getServletContext().getRequestDispatcher("/WEB-INF/rentals.jsp").forward(request, response);
-        
+        getServletContext().getRequestDispatcher("/WEB-INF/rentals.jsp").forward(request, response);  
     }
 
     /**
