@@ -64,11 +64,23 @@ public class UserRepository {
         }    
     }
 
-    public User getUser(String username) throws HavenCyclesDBException {
+    public User getUser(String email) throws HavenCyclesDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         try {
             User user;
-            user = em.find(User.class, username);
+            user = em.find(User.class, email);
+            return user;
+        } catch (Exception ex) {
+            throw new HavenCyclesDBException();
+        } finally {
+            em.close();
+        }
+    }
+    public User getUser(int userId) throws HavenCyclesDBException {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        try {
+            User user;
+            user = em.find(User.class, userId);
             return user;
         } catch (Exception ex) {
             throw new HavenCyclesDBException();
@@ -89,11 +101,11 @@ public class UserRepository {
             em.close();
         }
     }
-    public User getByNewPasswordUUID(String uuid){
+    public User getByPasswordUUID(String uuid){
         EntityManager em = DBUtil.getEmFactory().createEntityManager();       
         try {
             List<User> users;
-            users = em.createNamedQuery("User.findByPasswordresetUUID", User.class).setParameter("passwordresetUUID", uuid).getResultList();
+            users = em.createNamedQuery("User.findByPasswordUUID", User.class).setParameter("passwordUUID", uuid).getResultList();
             if(users.size() == 1){
                 return users.get(0);
             } else {

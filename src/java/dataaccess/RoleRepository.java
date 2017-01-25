@@ -15,7 +15,12 @@ import javax.persistence.EntityTransaction;
  * @author 693663
  */
 public class RoleRepository {
-    
+    /**
+     * 
+     * @param role
+     * @return
+     * @throws HavenCyclesDBException 
+     */
     public int insert(Role role) throws HavenCyclesDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -31,7 +36,12 @@ public class RoleRepository {
             em.close();
         }
     }
-
+    /**
+     * 
+     * @param role
+     * @return
+     * @throws HavenCyclesDBException 
+     */
     public int update(Role role) throws HavenCyclesDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -47,7 +57,12 @@ public class RoleRepository {
             em.close();
         }
     }
-
+    /**
+     * 
+     * @param role
+     * @return
+     * @throws HavenCyclesDBException 
+     */
     public int delete(Role role) throws HavenCyclesDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -63,7 +78,12 @@ public class RoleRepository {
             em.close();
         }    
     }
-
+    /**
+     * 
+     * @param roleId
+     * @return
+     * @throws HavenCyclesDBException 
+     */
     public Role getRole(int roleId) throws HavenCyclesDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         try {

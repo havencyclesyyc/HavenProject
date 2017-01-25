@@ -14,6 +14,12 @@ import javax.persistence.EntityTransaction;
  * @author 693663
  */
 public class CartProductRepository {
+    /**
+     * 
+     * @param cartProduct
+     * @return
+     * @throws HavenCyclesDBException 
+     */
     public int insert(CartProduct cartProduct) throws HavenCyclesDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -29,7 +35,12 @@ public class CartProductRepository {
             em.close();
         }
     }
-
+    /**
+     * 
+     * @param cartProduct
+     * @return
+     * @throws HavenCyclesDBException 
+     */
     public int update(CartProduct cartProduct) throws HavenCyclesDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -45,7 +56,12 @@ public class CartProductRepository {
             em.close();
         }
     }
-
+    /**
+     * 
+     * @param cartProduct
+     * @return
+     * @throws HavenCyclesDBException 
+     */
     public int delete(CartProduct cartProduct) throws HavenCyclesDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -61,7 +77,12 @@ public class CartProductRepository {
             em.close();
         }    
     }
-
+    /**
+     * 
+     * @param cartProductId
+     * @return
+     * @throws HavenCyclesDBException 
+     */
     public CartProduct getCartProduct(int cartProductId) throws HavenCyclesDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         try {

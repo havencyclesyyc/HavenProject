@@ -10,7 +10,6 @@ package businesslogic;
  * @author 545410
  */
 public enum Roles {
-    anonymous,
     customer,
     employee,
     admin

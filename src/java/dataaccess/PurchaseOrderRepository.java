@@ -14,6 +14,12 @@ import javax.persistence.EntityTransaction;
  * @author 693663
  */
 public class PurchaseOrderRepository {
+    /**
+     * 
+     * @param purchaseOrder
+     * @return
+     * @throws HavenCyclesDBException 
+     */
      public int insert(PurchaseOrder purchaseOrder) throws HavenCyclesDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -29,7 +35,12 @@ public class PurchaseOrderRepository {
             em.close();
         }
     }
-
+    /**
+     * 
+     * @param purchaseOrder
+     * @return
+     * @throws HavenCyclesDBException 
+     */
     public int update(PurchaseOrder purchaseOrder) throws HavenCyclesDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -45,7 +56,12 @@ public class PurchaseOrderRepository {
             em.close();
         }
     }
-
+    /**
+     * 
+     * @param purchaseOrder
+     * @return
+     * @throws HavenCyclesDBException 
+     */
     public int delete(PurchaseOrder purchaseOrder) throws HavenCyclesDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -61,7 +77,12 @@ public class PurchaseOrderRepository {
             em.close();
         }    
     }
-
+    /**
+     * 
+     * @param purchaseOrderId
+     * @return
+     * @throws HavenCyclesDBException 
+     */
     public PurchaseOrder getPurchaseOrder(int purchaseOrderId) throws HavenCyclesDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         try {

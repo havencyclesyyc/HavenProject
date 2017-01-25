@@ -14,6 +14,12 @@ import javax.persistence.EntityTransaction;
  * @author 693663
  */
 public class RentalBikeRepository {
+    /**
+     * 
+     * @param rentalBike
+     * @return
+     * @throws HavenCyclesDBException 
+     */
     public int insert(RentalBike rentalBike) throws HavenCyclesDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -29,7 +35,12 @@ public class RentalBikeRepository {
             em.close();
         }
     }
-
+    /**
+     * 
+     * @param rentalBike
+     * @return
+     * @throws HavenCyclesDBException 
+     */
     public int update(RentalBike rentalBike) throws HavenCyclesDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -45,7 +56,12 @@ public class RentalBikeRepository {
             em.close();
         }
     }
-
+    /**
+     * 
+     * @param rentalBike
+     * @return
+     * @throws HavenCyclesDBException 
+     */
     public int delete(RentalBike rentalBike) throws HavenCyclesDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -61,7 +77,12 @@ public class RentalBikeRepository {
             em.close();
         }    
     }
-
+    /**
+     * 
+     * @param rentalBikeId
+     * @return
+     * @throws HavenCyclesDBException 
+     */
     public RentalBike getRentalBike(int rentalBikeId) throws HavenCyclesDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         try {

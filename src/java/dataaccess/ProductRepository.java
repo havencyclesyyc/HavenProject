@@ -15,6 +15,12 @@ import javax.persistence.EntityTransaction;
  * @author 693663
  */
 public class ProductRepository {
+    /**
+     * 
+     * @param product
+     * @return
+     * @throws HavenCyclesDBException 
+     */
      public int insert(Product product) throws HavenCyclesDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -30,7 +36,12 @@ public class ProductRepository {
             em.close();
         }
     }
-
+     /**
+      * 
+      * @param product
+      * @return
+      * @throws HavenCyclesDBException 
+      */
     public int update(Product product) throws HavenCyclesDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -46,7 +57,12 @@ public class ProductRepository {
             em.close();
         }
     }
-
+    /**
+     * 
+     * @param product
+     * @return
+     * @throws HavenCyclesDBException 
+     */
     public int delete(Product product) throws HavenCyclesDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -62,7 +78,12 @@ public class ProductRepository {
             em.close();
         }    
     }
-
+    /**
+     * 
+     * @param productId
+     * @return
+     * @throws HavenCyclesDBException 
+     */
     public Product getProduct(int productId) throws HavenCyclesDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         try {
