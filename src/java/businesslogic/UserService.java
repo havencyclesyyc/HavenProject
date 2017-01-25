@@ -34,22 +34,22 @@ public class UserService {
     public boolean forgotPassword(String email, HttpServletRequest request) {
         try {
             User user = ur.getUser(email);
-            if(user == null){
-                return false;
-            }
-            String uuid = UUID.randomUUID().toString();
-            String template = request.getServletContext().getRealPath("/WEB-INF/emailtemplates/reset.html");
-            String link = request.getRequestURL().toString() + "?uuid=" + uuid; ;
-            HashMap<String, String> contents = new HashMap<>();      
-            contents.put("firstname", user.getFirstName());
-            contents.put("lastname", user.getLastName());
-            contents.put("email", user.getEmail());
-            contents.put("link", link);                              
+            if(user != null){
+                String uuid = UUID.randomUUID().toString();
+                String template = request.getServletContext().getRealPath("/WEB-INF/emailtemplates/reset.html");
+                String link = request.getRequestURL().toString() + "?uuid=" + uuid; ;
+                HashMap<String, String> contents = new HashMap<>();      
+                contents.put("firstname", user.getFirstName());
+                contents.put("lastname", user.getLastName());
+                contents.put("email", user.getEmail());
+                contents.put("link", link);                              
                 user.setPasswordUUID(uuid);
                 ur.update(user);
                 WebMailService.sendMail(user.getEmail(),"NotesKeepr Password Reset", template, contents);
-                return true; 
+                return true;
+            } 
         } catch (Exception ex) {
+            
         }
         return false;
     }
